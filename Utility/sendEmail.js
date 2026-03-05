@@ -3,15 +3,17 @@ const nodemailer = require("nodemailer");
 // ---------------------------------------
 // Create transporter ONCE (important)
 // ---------------------------------------
-const transporter = nodemailer.createTransport({
-  host: process.env.EMAIL_HOST,
-  port: 465,
-  secure: true, // SSL
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
-  },
-});
+ const transporter = nodemailer.createTransport({
+   pool: true,
+   host: process.env.EMAIL_HOST,
+   port: process.env.EMAIL_PORT,
+   secure: process.env.EMAIL_SECURE,
+   encryption: process.env.EMAIL_ENCRYPTION,
+   auth: {
+     user: process.env.EMAIL_USER,
+     pass: process.env.EMAIL_PASS,
+   },
+ });
 
 // Optional: verify connection on server start
 transporter.verify((error, success) => {
