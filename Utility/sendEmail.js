@@ -1,19 +1,17 @@
 const nodemailer = require("nodemailer");
-
+import logoImage from "../Utility/Images/event-rules-high-resolution-logo-transparent.png";
 // ---------------------------------------
 // Create transporter ONCE (important)
 // ---------------------------------------
- const transporter = nodemailer.createTransport({
-   pool: true,
-   host: process.env.EMAIL_HOST,
-   port: process.env.EMAIL_PORT,
-   secure: process.env.EMAIL_SECURE,
-   encryption: process.env.EMAIL_ENCRYPTION,
-   auth: {
-     user: process.env.EMAIL_USER,
-     pass: process.env.EMAIL_PASS,
-   },
- });
+const transporter = nodemailer.createTransport({
+  host: process.env.EMAIL_HOST,
+  port: 465,
+  secure: true, // SSL
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS,
+  },
+});
 
 // Optional: verify connection on server start
 transporter.verify((error, success) => {
@@ -75,7 +73,7 @@ const sendEmail = async (inquiry) => {
                 <tr>
                   <td align="center" style="background:#000;padding:30px;">
                     <img 
-                      src="https://eventsrules.com/images/logo.png" 
+                      src="${logoImage}" 
                       alt="Events Rules Logo" 
                       width="150" 
                       style="display:block;margin-bottom:10px;" 
